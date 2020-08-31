@@ -9,7 +9,7 @@ public class Main {
 
         //create our playing hand
         Deck playingDeck = new Deck();
-        playingDeck.getCards();
+        playingDeck.createCardsPackage();
         playingDeck.shuffle();
 
 

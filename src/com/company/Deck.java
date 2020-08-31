@@ -1,11 +1,10 @@
 package com.company;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Deck {
-    private ArrayList<Card> cards;
+    private ArrayList<Card> cards; //cards package
     private Player player;
 
     public Deck(){
@@ -13,7 +12,7 @@ public class Deck {
         this.player = new Player(cards);
     }
 
-    public  void getCards(){
+    public  void createCardsPackage(){
         //generate cards
         for(CardColor cardColor: CardColor.values()){
             for(CardValue cardValue: CardValue.values() ) {
@@ -21,17 +20,15 @@ public class Deck {
                 this.cards.add(new Card(cardColor, cardValue));
             }
         }
-
     }
 
-    public void shuffle() {
+    public void shuffle() { //shuffle the cards package
         ArrayList<Card> tmpDeck = new ArrayList<Card>();
-
         //Use random
         Random random = new Random();
         int randomCardIndex = 0;
         int originalSize  = this.cards.size();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < originalSize; i++) {
             //Generate random index
             randomCardIndex = random.nextInt((this.cards.size()-1-0) + 1) + 0;
             tmpDeck.add(this.cards.get(randomCardIndex));
@@ -40,7 +37,6 @@ public class Deck {
             this.cards.remove(randomCardIndex);
         }
         this.cards = tmpDeck;
-        this.player.setHand(this.cards);
     }
 
     public String toString() {
