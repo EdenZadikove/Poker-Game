@@ -56,19 +56,7 @@ public class Deck {
         player.setHand(tmpHand);
 
     }
-    public void createHandTEST(){
-        //get 5 random cards and insert them into player's hand
-        int i, randomCardIndex = 0;
-        ArrayList<Card> tmpHand = new ArrayList<Card>();
 
-        tmpHand.add(cards.get(1));
-        tmpHand.add(cards.get(4));
-        tmpHand.add(cards.get(1));
-        tmpHand.add(cards.get(5));
-        tmpHand.add(cards.get(4));
-
-        player.setHand(tmpHand);
-    }
 
     public int checkPair() {
         int i, j, cardsCounter = 0, pairCounter = 0 ;
@@ -103,6 +91,12 @@ public class Deck {
         return 0; //no three of a kind or four of a kind
     }
 
+    public void resetGame() {
+        //reset the game in order to start over
+        cards.clear();
+        player.setHand(cards); //empty array list
+    }
+
     public String toString() {
         String cardListOutput ="";
         int i = 1;
@@ -112,4 +106,20 @@ public class Deck {
         }
         return cardListOutput;
     }
+
+    //Test method
+    public void createHandTEST(){
+        //get 5 random cards and insert them into player's hand
+        int i, randomCardIndex = 0;
+        ArrayList<Card> tmpHand = new ArrayList<Card>();
+
+        tmpHand.add(cards.get(1));
+        tmpHand.add(cards.get(2));
+        tmpHand.add(cards.get(1));
+        tmpHand.add(cards.get(2));
+        tmpHand.add(cards.get(2));
+
+        player.setHand(tmpHand);
+    }
+
 }
