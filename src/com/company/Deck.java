@@ -9,14 +9,19 @@ public class Deck {
 
     public Deck(){
         this.cards = new ArrayList<Card>();
-        this.player = new Player(cards);
+        this.player = new Player();
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     public  void createCardsPackage(){
         //generate cards
         for(CardColor cardColor: CardColor.values()){
             for(CardValue cardValue: CardValue.values() ) {
-                //add a new card to the mix
+                //add a 2 same new cards to the mix
+                this.cards.add(new Card(cardColor, cardValue));
                 this.cards.add(new Card(cardColor, cardValue));
             }
         }
@@ -39,14 +44,14 @@ public class Deck {
         this.cards = tmpDeck;
     }
 
-    public String toString() {
-        String cardListOutput ="";
-        int i = 1;
-        for(Card card : this.cards) {
-            cardListOutput +="\n" + i + "-" +  card.toString();
-            i++;
+    public void createHand(){
+        //get 5 random cards and insert them into player's hand
+        int i, randomCardIndex = 0;
+        ArrayList<Card> tmpHand = new ArrayList<Card>();
+        for(i = 0; i < 5; i++) {
+            tmpHand.add(cards.get(i));
         }
-        return cardListOutput;
+        player.setHand(tmpHand);
     }
 
     public int checkPair() {
@@ -77,5 +82,15 @@ public class Deck {
                return cardCounter;
         }
         return 0; //no three of a kind or four of a kind
+    }
+
+    public String toString() {
+        String cardListOutput ="";
+        int i = 1;
+        for(Card card : this.cards) {
+            cardListOutput +="\n" + i + "-" +  card.toString();
+            i++;
+        }
+        return cardListOutput;
     }
 }

@@ -11,6 +11,7 @@ public class Main {
         Deck playingDeck = new Deck();
         playingDeck.createCardsPackage();
         playingDeck.shuffle();
+        playingDeck.createHand();
 
 
         //check for 1 pair of two pairs
@@ -20,7 +21,8 @@ public class Main {
 
 
         //print results
-        System.out.println(playingDeck +"\n");
+        System.out.println("Cards package:\n" + playingDeck +"\n");
+        System.out.println(playingDeck.getPlayer());
 
         //print pair/ pairs only if the player got one
         if(pairCounter != 0)
