@@ -6,9 +6,13 @@ import java.util.Random;
 
 public class Deck {
     private ArrayList<Card> cards;
+    private Player player;
+
     public Deck(){
         this.cards = new ArrayList<Card>();
+        this.player = new Player(cards);
     }
+
     public  void getCards(){
         //generate cards
         for(CardColor cardColor: CardColor.values()){
@@ -36,6 +40,7 @@ public class Deck {
             this.cards.remove(randomCardIndex);
         }
         this.cards = tmpDeck;
+        this.player.setHand(this.cards);
     }
 
     public String toString() {

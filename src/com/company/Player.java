@@ -1,9 +1,19 @@
 package com.company;
 
-public class Player {
-    private Card[] cards = new Card[5]; //array of cards
+import java.util.ArrayList;
 
-    public Player(Card[]cards){
-        this.cards = cards;
+public class Player {
+    private ArrayList<Card> hand;
+
+    public Player(ArrayList<Card> hand) {
+        this.hand = hand;
+    }
+
+    public void setHand(ArrayList<Card> hand) {
+        this.hand = hand;
+    }
+
+    public ArrayList<Card> getHand() {
+        return hand;
     }
 }
