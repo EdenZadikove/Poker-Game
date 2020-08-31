@@ -1,6 +1,8 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Player {
     private ArrayList<Card> hand;
@@ -11,6 +13,10 @@ public class Player {
     }
     public ArrayList<Card> getHand() {
         return hand;
+    }
+
+    public void sortHand() {
+        Collections.sort(hand, Comparator.comparing(Card::getCardValue));
     }
 
     @Override

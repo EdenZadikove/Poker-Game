@@ -8,10 +8,10 @@ public class Card {
         this.cardColor = cardColor;
         this.cardValue = cardValue;
     }
-    public CardColor cardColor() {
+    public CardColor getCardColor() {
         return this.cardColor;
     }
-    public CardValue cardValue() {
+    public CardValue getCardValue() {
         return this.cardValue;
     }
 
