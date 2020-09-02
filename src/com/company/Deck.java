@@ -58,43 +58,54 @@ public class Deck {
     }
 
 
-    public int checkPair() {
-        int i, j, cardsCounter = 0, pairCounter = 0 ;
+    public String checkHand() {
+        int i, j = 0, cardsCounter = 0, pairsCounter = 0, threeCounter = 0, fourCounter = 0;
+        String result = "No hand";
         ArrayList<Card> playerHand = player.getHand();
-        //sort hand
-        for(i = 0; i < playerHand.size(); i++) {
-            Card tmpCard = playerHand.get(i);
+
+        for(i = 0; i < playerHand.size(); i = j) {
             cardsCounter = 1;
             for(j = i+1; j < playerHand.size(); j++) {
-                if (tmpCard == playerHand.get(j)) cardsCounter++; //congratulation you got a pair
-                else break;
-            }
-            if(cardsCounter == 2)
-                pairCounter++;
-            i = j-1; //next different card
-        }
-        return pairCounter;
-    }
+                Card c1 = playerHand.get(i);
+                Card c2 = playerHand.get(j);
 
-    public int checkTreeOrFour() {
-        int i, j, cardCounter = 0;
-        ArrayList<Card> playerHand = player.getHand();
-        for(i = 0; i < playerHand.size(); i++) {
-            Card tmpCard = playerHand.get(i);
-            cardCounter = 1;
-            for(j = i+1; j < playerHand.size(); j++) {
-                if(tmpCard == playerHand.get(j)) cardCounter++; //congratulation you got a pair
+                if (c1.equals(c2))
+                    cardsCounter++;
+                else
+                    break;
             }
-            if(cardCounter == 3 || cardCounter == 4)
-               return cardCounter;
+            switch (cardsCounter) {
+                case 2:
+                    pairsCounter++;
+                    result = "1 pair";
+                    if(pairsCounter == 1 && threeCounter == 1)
+                        result = "Full House";
+                    if(pairsCounter == 2) {
+                        result = "2 pairs";
+                        i = playerHand.size(); // no point to continue checking.
+                    }
+                    break;
+                case 3:
+                    threeCounter++;
+                    result = "Three of a kind";
+                    if(pairsCounter == 1)
+                        result = "Full House";
+                    break;
+                case 4:
+                    fourCounter++;
+                    result = "Four of a kind";
+                    i = playerHand.size(); // no point to continue checking.
+                default:
+                    break;
+            }
         }
-        return 0; //no three of a kind or four of a kind
+        return result;
     }
 
     public void resetGame() {
         //reset the game in order to start over
-        cards.clear();
-        player.setHand(cards); //empty array list
+        cards.clear(); //clear the cards array list
+        player.setHand(cards); //clear user's hand
     }
 
     public String toString() {
@@ -109,15 +120,13 @@ public class Deck {
 
     //Test method
     public void createHandTEST(){
-        //get 5 random cards and insert them into player's hand
-        int i, randomCardIndex = 0;
         ArrayList<Card> tmpHand = new ArrayList<Card>();
 
-        tmpHand.add(cards.get(1));
+        tmpHand.add(cards.get(27));
+        tmpHand.add(cards.get(0));
         tmpHand.add(cards.get(2));
         tmpHand.add(cards.get(1));
-        tmpHand.add(cards.get(2));
-        tmpHand.add(cards.get(2));
+        tmpHand.add(cards.get(26));
 
         player.setHand(tmpHand);
     }

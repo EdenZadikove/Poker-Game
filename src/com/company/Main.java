@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 	    // welcome message
-        System.out.println("Welcome to poker");
+        System.out.println("Welcome to Poker Game!\n");
 
         //variables
         boolean gameLive = true;
@@ -14,65 +14,34 @@ public class Main {
 
         while(gameLive) {
             playingDeck.resetGame();
-            //create our playing hand
+
+            System.out.println("Shuffle the deck of cards...");
+            System.out.println("Handing out cards to a player...\n");
+
+            //create user playing hand
             playingDeck.createCardsPackage();
             playingDeck.shuffle();
+            //playingDeck.createHand();
 
-           // playingDeck.createHand();
-            //test method
+            //test method- enable line below to test
             playingDeck.createHandTEST();
             playingDeck.getPlayer().sortHand();
 
-
-            //check for 1 pair of two pairs
-            int pairCounter = playingDeck.checkPair();
-            //check for three or four of a kind
-            int threeOrFour = playingDeck.checkTreeOrFour();
+            //check which hand the user got.
+            String handCheckResult = playingDeck.checkHand();
 
             //print results
-            System.out.println("Cards package:\n" + playingDeck +"\n");
-            System.out.println(playingDeck.getPlayer()+"\n");
+            System.out.println("Player Hand: \n" + playingDeck.getPlayer());
+            System.out.println("Result: " + handCheckResult +"\n");
 
-            //print pair/pairs only if the player got one
-            boolean isWinner = false;
-            switch(pairCounter){
-                case 1:
-                    if(threeOrFour == 3)
-                        System.out.println("Congratulation, you got a Full House");
-                    else
-                        System.out.println("You got " + pairCounter + " pair");
-                    isWinner = true;
-                    break;
-                case 2:
-                    System.out.println("You got " + pairCounter + " pairs");
-                    isWinner = true;
-                    break;
-                default:
-                    break;
-            }
-            if(!isWinner) {
-                switch (threeOrFour){
-                    case 3:
-                        System.out.println("You got three of a kind");
-                        break;
-                    case 4:
-                        System.out.println("You got four of a kind");
-                        break;
-                    default:
-                        if(pairCounter == 0 && threeOrFour == 0)
-                            System.out.println("Sorry, you got no hand");
-                }
-            }
-
-
-            //another game
-            System.out.println("Game over. Would you like to take another hand?\n(1- for another game, 0- exit the game)\n");
+            //Ask the user if wants another game
+            System.out.println("Game over. Would you like to take another hand?\n(1- for another game, 0- exit the game)");
             Scanner scanner = new Scanner(System.in);
-            int answer =  scanInt(scanner);
-
+            int answer =  scanInt(scanner); // check input
             switch (answer) {
                 case 1:
                     gameLive = true;
+                    System.out.println("preparing a new game...\n");
                     break;
                 case 0:
                     gameLive = false;
@@ -82,20 +51,24 @@ public class Main {
                     break;
             }
         }
-
-
     }
+
     static int scanInt(Scanner scanner) {
         int answer = -1;
         boolean legalInput = false;
         while(!legalInput) {
             try{
                 answer =  scanner.nextInt();
-                legalInput = true;
+                if(answer != 1 && answer !=0) {
+                    System.out.println("Illegal input. please press 1 OR 0");
+                    legalInput = false;
+                } else
+                    legalInput = true;
             } catch(InputMismatchException e){
-                System.out.println("Illegal input. please press 1 OR 0\n");
+                System.out.println("Illegal input. please press 1 OR 0");
                 scanner.nextLine();
             }
+            System.out.println();
         }
         return answer;
     }

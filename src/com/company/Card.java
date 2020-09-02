@@ -15,6 +15,15 @@ public class Card {
         return this.cardValue;
     }
 
+    //overriding equals() method
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null)
+            return false;
+        if(obj == this)
+            return true;
+        return ((this.cardColor == ((Card)obj).getCardColor()) && this.cardValue == ((Card)obj).getCardValue());
+    }
     @Override
     public String toString() {
         return this.cardValue.toString() + "-" +this.cardColor.toString();
