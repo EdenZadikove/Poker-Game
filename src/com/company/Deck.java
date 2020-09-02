@@ -30,11 +30,11 @@ public class Deck {
     }
 
     public void shuffle() { //shuffle the cards package
-        ArrayList<Card> tmpDeck = new ArrayList<Card>();
-        //Use random
-        Random random = new Random();
         int randomCardIndex = 0;
         int originalSize  = this.cards.size();
+        ArrayList<Card> tmpDeck = new ArrayList<Card>();
+        Random random = new Random();
+        
         for (int i = 0; i < originalSize; i++) {
             //Generate random index
             randomCardIndex = random.nextInt((this.cards.size()-1-0) + 1) + 0;
@@ -48,16 +48,14 @@ public class Deck {
 
     public void createHand(){
         //get 5 random cards and insert them into player's hand
-        int i, randomCardIndex = 0;
+        int i;
         ArrayList<Card> tmpHand = new ArrayList<Card>();
-        for(i = 0; i < 5; i++) {
+        for(i = 0; i < 5; i++)
             tmpHand.add(cards.get(i));
-        }
         player.setHand(tmpHand);
-
     }
 
-
+    /*Search on sorted hand only!*/
     public String checkHand() {
         int i, j = 0, cardsCounter = 0, pairsCounter = 0, threeCounter = 0, fourCounter = 0;
         String result = "No hand";
@@ -66,13 +64,9 @@ public class Deck {
         for(i = 0; i < playerHand.size(); i = j) {
             cardsCounter = 1;
             for(j = i+1; j < playerHand.size(); j++) {
-                Card c1 = playerHand.get(i);
-                Card c2 = playerHand.get(j);
-
-                if (c1.equals(c2))
+                if (playerHand.get(i).equals(playerHand.get(j)))
                     cardsCounter++;
-                else
-                    break;
+                else break;
             }
             switch (cardsCounter) {
                 case 2:
@@ -109,24 +103,22 @@ public class Deck {
     }
 
     public String toString() {
-        String cardListOutput ="";
+        String cardListOutput = "";
         int i = 1;
-        for(Card card : this.cards) {
-            cardListOutput +="\n" + i + "-" +  card.toString();
-            i++;
-        }
+        for(Card card : this.cards)
+            cardListOutput +=(i++) + "-" +  card.toString() +"\n";
         return cardListOutput;
     }
 
-    //Test method
+    /*Test method- change the index according to the case you want to check.
+    e.g the indexes below for - Three of a kind.*/
     public void createHandTEST(){
         ArrayList<Card> tmpHand = new ArrayList<Card>();
-
-        tmpHand.add(cards.get(27));
         tmpHand.add(cards.get(0));
         tmpHand.add(cards.get(2));
         tmpHand.add(cards.get(1));
-        tmpHand.add(cards.get(26));
+        tmpHand.add(cards.get(1));
+        tmpHand.add(cards.get(1));
 
         player.setHand(tmpHand);
     }
