@@ -1,8 +1,6 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Random;
 
 public class Deck {
@@ -34,7 +32,7 @@ public class Deck {
         int originalSize  = this.cards.size();
         ArrayList<Card> tmpDeck = new ArrayList<Card>();
         Random random = new Random();
-        
+
         for (int i = 0; i < originalSize; i++) {
             //Generate random index
             randomCardIndex = random.nextInt((this.cards.size()-1-0) + 1) + 0;
